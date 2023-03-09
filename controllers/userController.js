@@ -25,5 +25,27 @@ module.exports = {
             res.json(user);
         })
         .catch((err) => res.status(500).json(err));
-}
+    },
+    // update a user
+    updateUser(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            {$set: req.body},
+            { new: true, runValidators: true }
+        )
+        .then(function (user) {
+            res.json(user);
+        })
+        .catch((err) => res.status(500).json(err));
+    },
+    // delete a user
+    deleteUser(req, res) {
+        User.findOneAndDelete(
+            { _id: req.params.userId }
+            )
+        .then(function (user) {
+            res.json(user);
+        })
+        .catch((err) => res.status(500).json(err));
+    },
 }
