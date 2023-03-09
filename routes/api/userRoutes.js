@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {
     getUsers,
-    // getSingleUser,
+    getSingleUser,
     createUser,
     // updateUser,
     // deleteUser,
@@ -15,6 +15,7 @@ const {
 router.route('/').get(getUsers).post(createUser);
 
 // /api/users/:id route to get a single user, update a user, and delete a user
+router.route('/:userId').get(getSingleUser)
 // router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
 // /api/users/:userId/thoughts route to post a new thought for a user

@@ -17,5 +17,13 @@ module.exports = {
             res.json(user);
         })
         .catch((err) => res.status(500).json(err));
-    }
+    },
+    // get a single user
+    getSingleUser(req, res) {
+        User.findOne({ _id: req.params.userId })
+        .then(function (user) {
+            res.json(user);
+        })
+        .catch((err) => res.status(500).json(err));
+}
 }
