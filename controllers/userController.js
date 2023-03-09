@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { User, Thought } = require('../models');
+const { User } = require('../models');
 
 module.exports = {
     // get all users
@@ -47,5 +47,5 @@ module.exports = {
             res.json(user);
         })
         .catch((err) => res.status(500).json(err));
-    },
+    }
 }
