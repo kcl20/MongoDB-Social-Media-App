@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-// const assignmentSchema = require('./Assignment');
+const Thought = require('./Thought');
 
 // Schema to create User model
 const userSchema = new Schema(
@@ -7,7 +7,6 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: true,
-      max_length: 50,
       unique: true, // must be unique
       trim: true, // trimmed, removes whitespace
     },
@@ -17,8 +16,18 @@ const userSchema = new Schema(
         unique: true, // must be unique
         match: [/.+@.+\..+/, 'Must use a valid email address'], // email validation using regex
     },
-    thoughts: [thoughtSchema],
-    friends: [friendSchema],
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Thought',
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: {
