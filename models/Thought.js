@@ -43,8 +43,7 @@ const thoughtSchema = new Schema(
         get: (createdAtDateValue) => dateFormat(createdAtDateValue, "dddd, mmmm dS, yyyy, h:MM:ss TT"), // use npm dateFormat package to format date
     },
     username: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+      type: String,
       required: true,
     },
     reactions: [reactionSchema], // array of nested subdocuments created with the reactionSchema
