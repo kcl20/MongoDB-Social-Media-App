@@ -2,24 +2,23 @@ const router = require('express').Router();
 
 const {
     addThought,
+    getThought,
+    getAllThoughts
     // updateThought,
     // removeThought,
-    // getThought,
-    // getAllThoughts,
     // getAllThoughtsByUser
 } = require('../../controllers/thoughtController');
 
 
 // /api/thoughts/:userId/ route to post a new thought or get all thoughts
-router.route('/').post(addThought);
-// router.route('/').get(getAllThoughts).post(addThought);
+// router.route('/').get(getAllThoughts);
+router.route('/').get(getAllThoughts).post(addThought);
 
 
-// /api/thoughts/:thoughtId route to delete a thought
+// /api/thoughts/:thoughtId route to update a thought, get a single thought, or delete a thought
 // router.route('/:thoughtId').put(updateThought).delete(removeThought);
+router.route('/:thoughtId').get(getThought);
 
-// /api/thoughts/:thoughtId route to get a single thought
-// router.route('/:thoughtId').get(getThought);
 
 // /api/thoughts/:userId route to get all thoughts for a user
 // router.route('/:userId').get(getAllThoughtsByUser);

@@ -6,8 +6,6 @@ const {
     createUser,
     updateUser,
     deleteUser,
-    addThought,
-    // removeThought,
 } = require('../../controllers/userController');
 
 // /api/users route to get all users and post a new user
