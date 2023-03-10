@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+// const dateFormat = require('../utils/dateFormat');
 
 // define reactionSchema subdocument
 // const reactionSchema = new Schema(
@@ -36,12 +36,14 @@ const thoughtSchema = new Schema(
       min_length: 1, // min length
       max_length: 280, // max length
     },
-    // timestamps: true, // adds createdAt and updatedAt,
-    // createdAt: {
-    //     type: Date,
-    //     default: Date.now,
-    //     get: (createdAtDateValue) => dateFormat(createdAtDateValue, "dddd, mmmm dS, yyyy, h:MM:ss TT"), // use npm dateFormat package to format date
-    // },
+   
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (date) => dateFormat(date),
+        // use dateFormat function to format date
+    },
+
     username: {
       type: String,
       required: true,
@@ -55,6 +57,7 @@ const thoughtSchema = new Schema(
       },
       toObject: {
         virtuals: true, // include virtuals when converting document to object when console.logging
+        getters: true, // run getters when converting document to object
       },
   }
 );
@@ -65,7 +68,9 @@ const thoughtSchema = new Schema(
 //   });
 
 
-
+const dateFormat = (date) => {
+  return date.toISOString().split("T") [0]
+}
 
 const Thought = model('Thought', thoughtSchema);
 
