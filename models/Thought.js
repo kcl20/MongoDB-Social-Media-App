@@ -4,10 +4,10 @@ const { Schema, model } = require('mongoose');
 // define reactionSchema subdocument
 const reactionSchema = new Schema(
     {
-        reactionID: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
-          },
+        // reactionID: {
+        //     type: Schema.Types.ObjectId,
+        //     default: () => new Types.ObjectId()
+        //   },
           reactionBody: {
               type: String,
               required: true,
@@ -19,9 +19,9 @@ const reactionSchema = new Schema(
             required: true,
           },
           createdAt: {
-              type: Date,
-              default: Date.now,
-              get: (createdAtDateValue) => dateFormat(createdAtDateValue, "dddd, mmmm dS, yyyy, h:MM:ss TT"), // use npm dateFormat package to format date
+            type: Date,
+            default: Date.now,
+            get: (date) => dateFormat(date),
         },
     }
 );

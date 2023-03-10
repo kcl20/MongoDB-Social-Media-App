@@ -65,5 +65,11 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   
+  getAllThoughtsByUser(req, res) {
+    console.log('getAllThoughtsByUser')
+    User.findOne({ id: req.params.userId })
+      .then((user) => res.json(user.thoughts))
+      .catch((err) => res.status(500).json(err));
+  }
 
 };
