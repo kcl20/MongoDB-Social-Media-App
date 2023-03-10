@@ -2,29 +2,29 @@ const { Schema, model } = require('mongoose');
 // const dateFormat = require('../utils/dateFormat');
 
 // define reactionSchema subdocument
-// const reactionSchema = new Schema(
-//     {
-//         reactionID: {
-//             type: Schema.Types.ObjectId,
-//             default: () => new Types.ObjectId()
-//           },
-//           reactionBody: {
-//               type: String,
-//               required: true,
-//               max_length: 280,
-//           },
-//           username: {
-//             type: Schema.Types.ObjectId,
-//             ref: 'User',
-//             required: true,
-//           },
-//           createdAt: {
-//               type: Date,
-//               default: Date.now,
-//               get: (createdAtDateValue) => dateFormat(createdAtDateValue, "dddd, mmmm dS, yyyy, h:MM:ss TT"), // use npm dateFormat package to format date
-//         },
-//     }
-// );
+const reactionSchema = new Schema(
+    {
+        reactionID: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId()
+          },
+          reactionBody: {
+              type: String,
+              required: true,
+              max_length: 280,
+          },
+          username: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+          },
+          createdAt: {
+              type: Date,
+              default: Date.now,
+              get: (createdAtDateValue) => dateFormat(createdAtDateValue, "dddd, mmmm dS, yyyy, h:MM:ss TT"), // use npm dateFormat package to format date
+        },
+    }
+);
 
 
 // Schema to create a thought model
@@ -48,7 +48,7 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    // reactions: [reactionSchema], // array of nested subdocuments created with the reactionSchema
+    reactions: [reactionSchema], // array of nested subdocuments created with the reactionSchema
   },
   {
     toJSON: {
@@ -63,9 +63,9 @@ const thoughtSchema = new Schema(
 );
 
 // virtual for length of reactions array
-// thoughtSchema.virtual('reactionCount').get(function() {
-//     return this.reactions.length;
-//   });
+thoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+  });
 
 
 const dateFormat = (date) => {
