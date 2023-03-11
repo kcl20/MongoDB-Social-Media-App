@@ -47,5 +47,29 @@ module.exports = {
             res.json(user);
         })
         .catch((err) => res.status(500).json(err));
+    }, 
+    // add a friend to a user
+    addFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $push: { friends: req.params.friendId } },
+            { new: true }
+            )
+        .then(function (user) {
+            res.json(user);
+        })
+        .catch((err) => res.status(500).json(err));
+    },
+    // remove a friend from a user
+    removeFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { new: true }
+            )
+        .then(function (user) {
+            res.json(user);
+        })
+        .catch((err) => res.status(500).json(err));
     }
 }
