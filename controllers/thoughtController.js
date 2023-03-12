@@ -18,7 +18,7 @@ module.exports = {
         Thought.create(req.body)
         .then(function (thought) {
             return User.findOneAndUpdate(
-            { id : req.body.userId },
+            { _id : req.body.userId },
             { $push: { thoughts: thought._id } },
             { new: true }
             );
@@ -54,7 +54,7 @@ module.exports = {
         !thought
           ? res.status(404).json({ message: 'No thought with this id!' })
           : User.findOneAndUpdate(
-              { id: thought.username },
+              { _id: thought.username },
               { $pull: { thoughts: req.params.thoughtId } },
               { new: true }
             )
@@ -90,9 +90,10 @@ addReaction(req, res) {
   },
   // Remove video response
   removeReaction(req, res) {
+    console.log("remove reaction")
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { $pull: { reactions: { _id: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
